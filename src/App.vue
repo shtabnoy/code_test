@@ -1,15 +1,40 @@
 <template>
   <div id="app">
-    <div>Hola, mundo!</div>
+    <div>Survey list</div>
+    <ul v-if="surveys.length">
+      <Survey
+        v-for="survey in surveys"
+        :key="survey.survey_type_id"
+        :survey="survey"
+      />
+    </ul>
   </div>
 </template>
 
 <script>
-//import client from 'api-client';
+import client from 'api-client';
+import Survey from './components/Survey.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      surveys: [],
+    }
+  },
   components: {
+    Survey,
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      client.getListSurveys().then((surveys) => {
+        console.log(surveys);
+        this.surveys = surveys;
+      })
+    }
   }
 }
 </script>
@@ -20,7 +45,7 @@ export default {
   font-size: 32px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
