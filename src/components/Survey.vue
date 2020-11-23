@@ -1,6 +1,6 @@
 <template>
   <li>
-    <div>{{ survey.survey_type }}</div>
+    <h2>{{ survey.survey_type }}</h2>
     <ul v-if="indexes.length">
       <Index
         v-for="index in indexes"

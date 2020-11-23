@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div>Survey list</div>
+    <h1>Survey List</h1>
     <ul v-if="surveys.length">
       <Survey
         v-for="survey in surveys"
@@ -42,10 +42,8 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 32px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }

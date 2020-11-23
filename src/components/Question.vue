@@ -1,13 +1,12 @@
 <template>
   <li>
-    <div>
+    <span>
       {{ question.name }}
-    </div>
+    </span>
   </li>
 </template>
 
 <script>
-
 export default {
   name: 'Question',
   props: {
