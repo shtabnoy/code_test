@@ -51,7 +51,6 @@
         </g>
       </g>
     </svg>
-
   </span>
 </template>
 

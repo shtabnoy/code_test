@@ -1,9 +1,12 @@
 <template>
   <li>
-    <h3>Index: <span>{{ index.index }}</span></h3>
-    <h3>Index Code: <span>{{ index.index_code }}</span></h3>
+    <div><strong>Index: </strong>{{ index.index }}</div>
+    <div><strong>Index Code: </strong>{{ index.index_code }}</div>
     <div v-if="index.questions && index.questions.length">
-      <h3 @click="toggleQuestions">Questions: <Icon :name="showQuestions ? 'chevron-up' : 'chevron-down'" /></h3>
+      <div role="button" :aria-expanded="showQuestions ? 'true' : 'false'" @click="toggleQuestions">
+        <strong>Questions:</strong>
+        <Icon :name="showQuestions ? 'chevron-up' : 'chevron-down'" />
+      </div>
       <ul v-show="showQuestions">
         <Question
           v-for="question in index.questions"
@@ -13,7 +16,10 @@
       </ul>
     </div>
     <div v-if="index.subindexes && index.subindexes.length">
-      <h3 @click="toggleSubindexes">Subindexes: <Icon :name="showSubindexes ? 'chevron-up' : 'chevron-down'" /></h3>
+      <div role="button" :aria-expanded="showSubindexes ? 'true' : 'false'" @click="toggleSubindexes">
+        <strong>Subindexes:</strong>
+        <Icon :name="showSubindexes ? 'chevron-up' : 'chevron-down'" />
+      </div>
       <ul v-show="showSubindexes">
         <Index
           v-for="(subindex, i) in index.subindexes"
@@ -59,7 +65,15 @@ export default {
 </script>
 
 <style scoped>
-  h3 > span {
-    font-weight: normal;
+  li {
+    margin: 12px 0;
+    list-style: none;
+  }
+  [role="button"] {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  [role="button"] > span {
+    margin-left: 6px;
   }
 </style>

@@ -34,5 +34,10 @@ export default {
 </script>
 
 <style scoped>
-
+  h2 {
+    text-decoration: underline;
+  }
+  li {
+    list-style: none;
+  }
 </style>
