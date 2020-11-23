@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <h1>Survey List</h1>
-    <ul v-if="surveys.length">
+    <div v-if="loading">
+      <Icon name="spinner" />
+    </div>
+    <ul v-else-if="surveys.length">
       <Survey
         v-for="survey in surveys"
         :key="survey.survey_type_id"
@@ -14,26 +17,36 @@
 <script>
 import client from 'api-client';
 import Survey from './components/Survey.vue'
+import Icon from './components/Icon.vue'
 
 export default {
   name: 'App',
   data() {
     return {
       surveys: [],
+      loading: false,
     }
   },
   components: {
     Survey,
+    Icon,
   },
   created() {
     this.fetchData();
   },
   methods: {
-    fetchData() {
-      client.getListSurveys().then((surveys) => {
-        console.log(surveys);
+    async fetchData() {
+      this.loading = true
+
+      try {
+        const surveys = await client.getListSurveys();
         this.surveys = surveys;
-      })
+        console.log(surveys);
+      } catch (error) {
+        console.error('Oops... Error happended: ' + error);
+      }
+      
+      this.loading = false
     }
   }
 }

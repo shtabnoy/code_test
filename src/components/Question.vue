@@ -1,8 +1,9 @@
 <template>
   <li>
-    <span>
-      {{ question.name }}
-    </span>
+    <div>{{ question.name }}</div>
+    <div v-if="question.project_id && question.project_id.length">
+      <strong>Project ids:</strong> {{ question.project_id.join(', ') }}
+    </div>
   </li>
 </template>
 
