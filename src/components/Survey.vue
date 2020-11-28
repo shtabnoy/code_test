@@ -2,9 +2,10 @@
   <li>
     <h2>{{ survey.survey_type }}</h2>
     <ul v-if="indexes.length">
+      <!-- prefer to use the array index, so you do not have to care about repeated data -->
       <Index
-        v-for="index in indexes"
-        :key="index.index_code"
+        v-for="(index, i) in indexes"
+        :key="i"
         :index="index"
       />
     </ul>
@@ -12,7 +13,8 @@
 </template>
 
 <script>
-import Index from './Index'
+//alias can be used instead of relative path
+import Index from '@/components/Index'
 
 export default {
   name: 'Survey',
@@ -34,6 +36,7 @@ export default {
 </script>
 
 <style scoped>
+/* try to always use class */
   h2 {
     text-decoration: underline;
   }

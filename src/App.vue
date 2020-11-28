@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <h1>Survey List</h1>
-    <div v-if="loading">
-      <Icon name="spinner" />
-    </div>
-    <ul v-else-if="surveys.length">
+    <!-- no need for the div, add a class to your element and position it as you want -->
+    <Icon name="spinner" v-if="loading" />
+    <!-- no need to double check, trust the states -->
+    <ul v-else>
+      <!-- prefer to use the array index, so you do not have to care about repeated data -->
       <Survey
-        v-for="survey in surveys"
-        :key="survey.survey_type_id"
+        v-for="(survey, index) in surveys"
+        :key="index"
         :survey="survey"
       />
     </ul>
@@ -16,15 +17,16 @@
 
 <script>
 import client from 'api-client';
-import Survey from './components/Survey.vue'
-import Icon from './components/Icon.vue'
+//alias can be used instead of relative path
+import Survey from '@/components/Survey.vue'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'App',
   data() {
     return {
       surveys: [],
-      loading: false,
+      loading: true,
     }
   },
   components: {
@@ -36,13 +38,14 @@ export default {
   },
   methods: {
     async fetchData() {
-      this.loading = true
+      // this.loading = true -> initial data is always set inside data, and then modified
 
       try {
         const surveys = await client.getListSurveys();
         this.surveys = surveys;
-        console.log(surveys);
+        console.log(surveys); // left over?
       } catch (error) {
+         // where does the use see this? an error component can be handy
         console.error('Oops... Error happended: ' + error);
       }
       

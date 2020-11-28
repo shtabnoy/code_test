@@ -1,4 +1,6 @@
 <template>
+<!-- if you have used the details component: most likely you would not need to implement the chevrons,
+with he current implementation: you could have implemented all of them with CSS using an :after pseudo class-->
   <span>
     <!-- Chevron-down -->
     <svg
